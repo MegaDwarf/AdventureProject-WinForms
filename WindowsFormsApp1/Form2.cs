@@ -551,7 +551,9 @@ namespace WindowsFormsApp1
             //person Monsterr = new person(/*имя*/"Монстер",/*здоровье*/ 60,/*сила*/ 2,/*интелект*/ 1,/*ловкость*/ 1, /*харизма*/1,/*урон*/ 30,/*уровень*/ 1, /*количество*/1);
             Monster.count= generatemonsters();
             richTextBox2.Clear();
-        
+            richTextBox2.Text += "Вы обнаружили " + Monster.count.ToString()+" Монстров";
+
+
             Pendragon.movepoint -= 1;
             tabPage2.Parent = tabControl1;
             this.tabControl1.SelectedIndex = 1;
@@ -1051,7 +1053,7 @@ namespace WindowsFormsApp1
                     if (death() == true) MessageBox.Show("Вы потерпели поражение в битве, но на в войне! \n Вы возродились в начальной локации, но ваши навыки немного уменьшились");
                 }
             }
-            if (Pendragon.magic == true)
+            if (Pendragon.magic == true && Pendragon.mana<=20)
             {
                 Pendragon.mana -= 20;
                 Random a = new Random();
