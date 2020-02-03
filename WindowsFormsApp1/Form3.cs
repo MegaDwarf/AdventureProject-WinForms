@@ -54,11 +54,11 @@ namespace WindowsFormsApp1
 
         //экземпляры оружия и брони
         item[] item_array = new item[5]; //кол-во всех предметов в игре
-        public item defolt = new item("Старая крестьянская одежда", 0, 1, 0, 0, 0, 0, 0, 1);
-        public item sword = new item("Старый одноручный меч", 0, 1, 1, 0, 0, 0, 15, 3);
-        public item shield = new item("Старый щит", 10, 1, 1, 0, 0, 0, 0, 3);
-        public item armor = new item(/*наименование одежды*/"Старые доспехи рыцаря света",/*характеристика здоровье+*/ 20,/*макс здоровье*/ 0,/*сила*/ 1, /*интелект*/ 0,/*ловкость*/ 0, /*харизма*/1, /*урон*/0, /*идентификатор*/4);
-        public item greatsword = new item("Великий божественный меч", 20, 50, 5, 0, 0, 0, 49, 3);
+        public item defolt = new item("Старая крестьянская одежда", 0, 0, 0, 0, 0, 0, false,false,true);
+        public item sword = new item("Старый одноручный меч", 0, 1, 0, 0, 0, 15,true,true,false);
+        public item shield = new item("Старый щит", 10, 1, 0, 0, 0, 0,true,false,false);
+        public item armor = new item(/*наименование одежды*/"Старые доспехи рыцаря света",/*характеристика здоровье+*/ 20,/*сила*/ 1, /*интелект*/ 0,/*ловкость*/ 0, /*харизма*/1, /*урон*/0, /*левая рука*/false,/*правая рука*/false,/*тело*/true);
+        public item greatsword = new item("Великий божественный меч", 50, 5, 0, 0, 0, 49, true, true, false);
 
 
         public void button1_Click(object sender, EventArgs e)
@@ -72,25 +72,41 @@ namespace WindowsFormsApp1
                 item_array[3] = armor;
                 item_array[4] = greatsword;
 
+               
             if (button1.Text == "Надеть предмет")
             {
                 
                 
                 for (int i = 0; i < item_array.Length; i++)//поиск по полю объекта
                 {
-                    if (item_array[i].name == listBox1.SelectedItem.ToString())
+                    if (item_array[i].name == listBox1.SelectedItem.ToString()  &&(((item_array[i].lhand ==true) && (f2.Pendragon.lhand == false))|| (item_array[i].rhand == true && f2.Pendragon.rhand == false) || (item_array[i].body == true && f2.Pendragon.body == false)))
                     {
-
-                        listBox2.Items.Add(listBox1.SelectedItem.ToString());
-                        f2.Pendragon.health = item_array[i].health + f2.Pendragon.health;
-                        f2.Pendragon.maxhealth = item_array[i].health + f2.Pendragon.maxhealth;
-                        f2.Pendragon.strengh = item_array[i].strengh + f2.Pendragon.strengh;
-                        f2.Pendragon.inteligens = item_array[i].inteligens + f2.Pendragon.inteligens;
-                        f2.Pendragon.agility = item_array[i].agility + f2.Pendragon.agility;
-                        f2.Pendragon.charisma = item_array[i].charisma + f2.Pendragon.charisma;
-                        f2.Pendragon.damage = item_array[i].damage + f2.Pendragon.damage;
                         
+                        
+                            listBox2.Items.Add(listBox1.SelectedItem.ToString());
+                            f2.Pendragon.health = item_array[i].health + f2.Pendragon.health;
+                            f2.Pendragon.maxhealth = item_array[i].health + f2.Pendragon.maxhealth;
+                            f2.Pendragon.strengh = item_array[i].strengh + f2.Pendragon.strengh;
+                            f2.Pendragon.inteligens = item_array[i].inteligens + f2.Pendragon.inteligens;
+                            f2.Pendragon.agility = item_array[i].agility + f2.Pendragon.agility;
+                            f2.Pendragon.charisma = item_array[i].charisma + f2.Pendragon.charisma;
+                            f2.Pendragon.damage = item_array[i].damage + f2.Pendragon.damage;
+                       
                         label2.Text = "Здоровье: "+ f2.Pendragon.health.ToString()+"/" + f2.Pendragon.maxhealth.ToString() + "\n" + "Сила:" + f2.Pendragon.strengh.ToString() + "\n" + "Интелект:" + f2.Pendragon.inteligens.ToString() + "\n" + "Ловкость:" + f2.Pendragon.agility.ToString() + "\n" + "Харизма: " + f2.Pendragon.charisma.ToString() + "\n" + "Урон:" + f2.Pendragon.damage.ToString() + "\n";
+
+                        if ((item_array[i].rhand == true) && (f2.Pendragon.rhand == false))
+                        {
+                            f2.Pendragon.rhand = true;
+                        }
+                        else if (item_array[i].lhand == true && f2.Pendragon.lhand == false)
+                        {
+                            f2.Pendragon.lhand = true;
+                        }
+                        if (item_array[i].body == true && f2.Pendragon.body == false)
+                        {
+                            f2.Pendragon.body = true;
+                        }
+                        listBox1.Items.RemoveAt(listBox1.SelectedIndex);i = item_array.Length;
 
                     }
 
@@ -108,7 +124,7 @@ namespace WindowsFormsApp1
 
 
 
-                listBox1.Items.RemoveAt(listBox1.SelectedIndex);
+                 
             }
 
 
@@ -134,6 +150,20 @@ namespace WindowsFormsApp1
 
                         label2.Text = "Здоровье: " + f2.Pendragon.health.ToString() + "/" + f2.Pendragon.maxhealth.ToString() + "\n" + "Сила:" + f2.Pendragon.strengh.ToString() + "\n" + "Интелект:" + f2.Pendragon.inteligens.ToString() + "\n" + "Ловкость:" + f2.Pendragon.agility.ToString() + "\n" + "Харизма: " + f2.Pendragon.charisma.ToString() + "\n" + "Урон:" + f2.Pendragon.damage.ToString() + "\n";
 
+                        if ((item_array[i].rhand == true) && (f2.Pendragon.rhand == true))
+                        {
+                            f2.Pendragon.rhand = false;
+                        }
+                        else if (item_array[i].lhand == true && f2.Pendragon.lhand == true)
+                        {
+                            f2.Pendragon.lhand = false;
+                        }
+                        if (item_array[i].body == true && f2.Pendragon.body == true)
+                        {
+                            f2.Pendragon.body = false;
+                        }
+                        listBox2.Items.RemoveAt(listBox2.SelectedIndex); i = item_array.Length;
+
                     }
 
 
@@ -151,7 +181,7 @@ namespace WindowsFormsApp1
 
 
 
-                listBox2.Items.RemoveAt(listBox2.SelectedIndex);
+               // listBox2.Items.RemoveAt(listBox2.SelectedIndex);
             }
 
             

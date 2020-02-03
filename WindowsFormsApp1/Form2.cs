@@ -552,7 +552,7 @@ namespace WindowsFormsApp1
             Monster.count= generatemonsters();
             richTextBox2.Clear();
             richTextBox2.Text += "Вы обнаружили " + Monster.count.ToString()+" Монстров";
-
+            pictureBox73.Image = WindowsFormsApp1.Properties.Resources.Монстр11;
 
             Pendragon.movepoint -= 1;
             tabPage2.Parent = tabControl1;
@@ -1019,7 +1019,8 @@ namespace WindowsFormsApp1
 
         private void button9_Click(object sender, EventArgs e)
         {
-            listBox1.Items.Add("Великий божественный меч");
+            listBox1.Items.Add("Великий божественный меч"); 
+                listBox1.Items.Add("Старые доспехи рыцаря света");
             button9.Enabled = false;
             button9.Visible = false;
         }

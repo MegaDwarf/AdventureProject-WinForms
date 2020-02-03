@@ -80,11 +80,14 @@ namespace WindowsFormsApp1
             public int movepoint;
             public bool magic;
             public bool wepon;
+            public bool lhand;
+            public bool rhand;
+            public bool body;
             public int exp;
             public int level;
             public int count;
             public int[,] mcoord = new int[7, 5]; 
-            public person() { name = "Pendragon";  strengh = 1; inteligens = 1; agility = 1; charisma = 1; damage = 1;movepoint = 2;wepon = false; magic = false; health = 100; maxhealth=100 ; mana = 100; maxmana = 100; level = 1; exp = 0; }
+            public person() { name = "Pendragon";  strengh = 1; inteligens = 1; agility = 1; charisma = 1; damage = 1;movepoint = 2;wepon = false; magic = false; health = 100; maxhealth=100 ; mana = 100; maxmana = 100; level = 1; exp = 0;lhand = false;rhand = false;body = false; }
             public person(int a) { name = "Monster";health = 100+a*10; }
             public person(string n, int h, int s, int i, int ag, int ch, int d,int lev,int coun) { name = n; health = h; strengh = s; inteligens = i; agility = ag; charisma = ch; damage = d; level = lev; count = coun; }
 
